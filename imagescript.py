@@ -5,7 +5,7 @@ import json
 import sys
 import getopt
 
-PATH = "/home/vandna/dataset/"   # Change this to where you stored your image folder
+PATH = Path.home() / "Desktop"  # Change this to where you stored your image folder
 SPEED = 1  # Adjust to speed up the process. You do need a good internet connection for higher speeds.
 # Otherwise images will be skipped
 
@@ -51,15 +51,16 @@ class Downloader:
         for link in links:
             self.urls_list_file.write(link + "\n")
         self.links += len(links)
-        print(len(links)) 
-        print("links have been saved.")
+        print(len(links))
 
     def run(self, scroll=2):
         self.all_images(scroll)
         self.driver.close()
         self.urls_list_file.close()
-        print("All done.  links saved in total")
-        print(self.links)
+        print("All done")
+        print(self.links) 
+        print("links saved in total")
+
 
 argv = sys.argv[1:]
 
@@ -67,7 +68,7 @@ try:
     opts, args = getopt.getopt(argv, "f:txt:l:", ["folder", "txtfile", "length"])
     folder, txtfile, length = "", "", ""
     if (len(opts) == 0 and len(opts) > 1):
-      print ("blusage: script.py -f ../../Downloads/dataset/ -txt <text file for urls> -l <higher number gives more pictures> ")
+      print ("blusage: script.py -f <folder containing images> -txt <text file for urls> -l <higher number gives more pictures> ")
     else:
         for tpl in opts:
             if "-f" in tpl:
